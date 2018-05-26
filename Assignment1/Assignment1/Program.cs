@@ -27,44 +27,43 @@ namespace Assignment1
         public static void AddSinhVien(List<SinhVien> list)
         {
             bool c;
-            string maSV;
+            string code;
             do
             {
-                maSV = readString("Ma sinh vien: ");
-                c = FindByCode(list, maSV) == null;
+                code = readString("Studen Code : ");
+                c = FindByCode(list, code) == null;
                 if (!c)
                 {
-                    System.Console.WriteLine("Ma sinh vien trung, nhap ma sinh vien khac");
+                    System.Console.WriteLine("Dupplicate Code. Retype!");
                 }
             } while (!c);
-            string hoTen = readString("Ho ten: ");
-            DateTime ngaySinh = readDateTime("Ngay sinh (dd/MM/yyyy): ");
-            string diaChi = readString("Dia chi: ");
-            string dienThoai = readString("So dien thoai: ");
-            list.Add(new SinhVien(maSV, hoTen, ngaySinh, diaChi, dienThoai));
+            string name = readString("Full Name : ");
+            DateTime date = readDateTime("Date of Birth (dd/MM/yyyy): ");
+            string address = readString("Address : ");
+            string phone = readString("Phone : ");
+            list.Add(new SinhVien(code, name, date, address, phone));
         }
         public static void ModifySinhVien(List<SinhVien> list)
         {
             SinhVien sv;
-            string maSV = readString("Nhap ma sinh vien can chinh sua thong tin: ");
-            sv = FindByCode(list, maSV);
+            string code = readString("Code of modified Student : ");
+            sv = FindByCode(list, code);
             if (sv == null)
             {
-                System.Console.WriteLine($"Khong tim thay sinh vien {maSV} trong he thong!");
+                System.Console.WriteLine($"{code} not found!");
             }
             else
             {
-                sv.FullName = readString("Ho ten: ");
-                sv.BirthDate = readDateTime("Ngay sinh (dd/MM/yyyy): ");
-                sv.Address = readString("Dia chi: ");
-                sv.Phone = readString("So dien thoai: ");
-                System.Console.WriteLine("Cap nhat thanh cong");
+                sv.FullName = readString("Full Name : ");
+                sv.BirthDate = readDateTime("Date of Birth (dd/MM/yyyy): ");
+                sv.Address = readString("Address : ");
+                sv.Phone = readString("Phone : ");
+                Console.WriteLine("Updated");
             }
         }
         public static void FindSinhVien(List<SinhVien> list)
         {
-            Console.WriteLine("find by student code : ");
-            string msSV = Console.ReadLine();
+            string msSV = readString("Found for Code : ");
             SinhVien sv = FindByCode(list, msSV);
             if (sv != null) sv.XemThongTin();
             else Console.WriteLine("Not found");
@@ -157,7 +156,9 @@ namespace Assignment1
                     case 2:
                         ListSinhVien.FindSinhVien(list);
                         break;
-                    case 3: break;
+                    case 3:
+                        ListSinhVien.ModifySinhVien(list);
+                        break;
                 }
             } while (choose >= 0 && choose < Menu.options.Length);
         }
