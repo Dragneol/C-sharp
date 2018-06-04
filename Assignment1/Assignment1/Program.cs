@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Assignment1
@@ -26,21 +27,21 @@ namespace Assignment1
     {
         public static void AddSinhVien(List<SinhVien> list)
         {
-            bool c;
+            bool dup;
             string code;
             do
             {
                 code = readString("Studen Code : ");
-                c = FindByCode(list, code) == null;
-                if (!c)
+                dup = FindByCode(list, code) == null;
+                if (!dup)
                 {
                     System.Console.WriteLine("Dupplicate Code. Retype!");
                 }
-            } while (!c);
+            } while (!dup);
             string name = readString("Full Name : ");
             DateTime date = readDateTime("Date of Birth (dd/MM/yyyy): ");
             string address = readString("Address : ");
-            string phone = readString("Phone : ");
+            string phone = readPhone("Phone : ");
             list.Add(new SinhVien(code, name, date, address, phone));
         }
         public static void ModifySinhVien(List<SinhVien> list)
@@ -57,7 +58,7 @@ namespace Assignment1
                 sv.FullName = readString("Full Name : ");
                 sv.BirthDate = readDateTime("Date of Birth (dd/MM/yyyy): ");
                 sv.Address = readString("Address : ");
-                sv.Phone = readString("Phone : ");
+                sv.Phone = readPhone("Phone : ");
                 Console.WriteLine("Updated");
             }
         }
@@ -84,7 +85,7 @@ namespace Assignment1
         }
         private static string readString(string msg)
         {
-            System.Console.Write(msg);
+            Console.Write(msg);
             return Console.ReadLine();
         }
         private static SinhVien FindByCode(List<SinhVien> list, string msSV)
@@ -97,6 +98,20 @@ namespace Assignment1
                 }
             }
             return null;
+        }
+        private static string readPhone(string msg)
+        {
+            do
+            {
+                Console.Write(msg);
+                string phone = Console.ReadLine();
+                Regex phoneCultureRegex = new Regex(@"(09|01[2|6|8|9])+([0-9]{8})\b");
+                if (!phoneCultureRegex.IsMatch(phone))
+                {
+                    Console.WriteLine("Wrong VN phone format");
+                }
+                else return phone;
+            } while (true);
         }
         private static DateTime readDateTime(string msg)
         {
