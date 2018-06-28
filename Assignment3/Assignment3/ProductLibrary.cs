@@ -175,6 +175,7 @@ namespace Assignment3
                     list.Add(new Product { ID = ID, Name = name, Price = price, Quantity = quantity });
                 }
             }
+            cnn.Close();
             return list;
         }
 
