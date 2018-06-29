@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace Lab1
+namespace Lab1.Models
 {
     public class UserInfo
     {
@@ -18,16 +18,12 @@ namespace Lab1
     public class UserInfoData
     {
         private static string strCon = "server=.;database=Manager;uid=sa;pwd=123";
-        public UserInfoData()
-        {
-
-        }
 
         public void InsertUserInfo(UserInfo newUser)
         {
             SqlConnection cnn = new SqlConnection(strCon);
             String SqlINSERT = "Insert UserInfo values" +
-                "(@user, @pass, @dob, @address, @emai)";
+                "(@user, @pass, @dob, @address, @email)";
             SqlCommand cmd = new SqlCommand(SqlINSERT, cnn);
             cmd.Parameters.AddWithValue("@user", newUser.Username);
             cmd.Parameters.AddWithValue("@pass", newUser.Password);
@@ -39,9 +35,9 @@ namespace Lab1
                 cnn.Open();
                 cmd.ExecuteNonQuery();
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception("Error");
+                throw new Exception("Error : " + ex.Message);
             }
             finally
             {
@@ -56,7 +52,7 @@ namespace Lab1
                 "[Password]=@pass, " +
                 "BirthDate = @dob, " +
                 "[Address] = @address, " +
-                "Email = @email" +
+                "Email = @email " +
                 "Where Username =@user";
             SqlCommand cmd = new SqlCommand(SqlUPDATE, cnn);
             cmd.Parameters.AddWithValue("@pass", user.Password);
@@ -127,5 +123,4 @@ namespace Lab1
             return data;
         }
     }
-
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NUnitTest
+namespace Validation
 {
-    class DateValid
+    class ValidDate
     {
         /// <summary>
         /// Determine Maximum Days in a Month

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Lab1.Models;
+using System;
 using System.Web.UI.WebControls;
-using User;
 namespace Lab1
 {
     public partial class MaintainUser : System.Web.UI.Page

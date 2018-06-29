@@ -73,7 +73,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -84,6 +83,7 @@
     <Compile Include="MaintainUser.aspx.designer.cs">
       <DependentUpon>MaintainUser.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,14 +96,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UserInfo\UserInfo.csproj">
-      <Project>{ea4336a8-a525-4c51-b5ec-d807db08fa75}</Project>
-      <Name>UserInfo</Name>
-    </ProjectReference>
+    <Folder Include="MyCode\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
